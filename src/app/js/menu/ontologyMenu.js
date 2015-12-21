@@ -77,6 +77,9 @@ module.exports = function (loadOntologyFromText) {
 
 		var ontologyOptions = d3.selectAll(".select li").classed("selected-ontology", false);
 
+		loadFromUrl();
+		return;
+
 		// IRI parameter
 		var iriKey = "iri=";
 		var fileKey = "file=";
@@ -226,6 +229,32 @@ module.exports = function (loadOntologyFromText) {
 			loadOntologyFromTextAndTrimFilename(reader.result, filename);
 			setLoadingStatus(true);
 		};
+	}
+
+	// http://myWebPage.com/subPage/#url=http://localhost/WebVOWL/deploy/data/foaf.json
+	function loadFromUrl() {
+		// slice the "#" character
+		var hashParameter = location.hash.slice(1);
+		var urlKey = "url=";
+		var jsonUrl;
+
+		if (
+				hashParameter.substr(0, urlKey.length) != urlKey ||
+				(jsonUrl = decodeURIComponent(hashParameter.slice(urlKey.length))) == ""
+		) {
+			console.log("JSON url not defined.");
+			jsonUrl = "http://localhost/mapon/upload/foaf.json";
+			//return;
+		}
+
+		$.ajax({
+			async: false,
+			type: "GET",
+			url: jsonUrl,
+			success: function( data ) {
+				loadOntologyFromTextAndTrimFilename( JSON.stringify(data), "test" );
+			}
+		});
 	}
 
 	function loadFromOntology(selectedFile, filename) {

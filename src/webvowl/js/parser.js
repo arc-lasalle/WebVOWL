@@ -479,7 +479,7 @@ module.exports = function (graph) {
 				// Replace id with object
 				subOrSuperPropertiesArray[i] = subOrSuperProperty;
 			} else {
-				console.warn("No sub-/superproperty was found for id: " + subOrSuperPropertyId);
+				//console.warn("No sub-/superproperty was found for id: " + subOrSuperPropertyId);
 			}
 		}
 	}

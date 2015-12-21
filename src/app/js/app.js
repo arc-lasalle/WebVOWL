@@ -49,19 +49,46 @@ module.exports = function () {
 		pauseMenu = require("./menu/pauseMenu")(graph);
 		resetMenu = require("./menu/resetMenu")(graph, [gravityMenu, filterMenu, modeMenu,
 			focuser, selectionDetailDisplayer, pauseMenu]);
-		ontologyMenu = require("./menu/ontologyMenu")(loadOntologyFromText);
+		//ontologyMenu = require("./menu/ontologyMenu")(loadOntologyFromText);
 
-		d3.select(window).on("resize", adjustSize);
+		//d3.select(window).on("resize", adjustSize);
 
 		// setup all bottom bar modules
-		setupableMenues = [exportMenu, gravityMenu, filterMenu, modeMenu, resetMenu, pauseMenu, sidebar, ontologyMenu];
+		setupableMenues = [exportMenu, gravityMenu, filterMenu, modeMenu, resetMenu, pauseMenu, sidebar];
 		setupableMenues.forEach(function (menu) {
 			menu.setup();
 		});
 
+		loadOntFromUrl();
+
 		graph.start();
-		adjustSize();
+		//adjustSize();
 	};
+
+	function loadOntFromUrl() {
+		// slice the "#" character
+		var hashParameter = location.hash.slice(1);
+		var urlKey = "url=";
+		var jsonUrl;
+
+		if (
+				hashParameter.substr(0, urlKey.length) != urlKey ||
+				(jsonUrl = decodeURIComponent(hashParameter.slice(urlKey.length))) == ""
+		) {
+			console.log("JSON url not defined.");
+			jsonUrl = "http://localhost/mapon/upload/foaf.json";
+			//return;
+		}
+
+		$.ajax({
+			async: false,
+			type: "GET",
+			url: jsonUrl,
+			success: function( data ) {
+				loadOntologyFromText( JSON.stringify(data), "test" );
+			}
+		});
+	}
 
 	function loadOntologyFromText(jsonText, filename, alternativeFilename) {
 		pauseMenu.reset();

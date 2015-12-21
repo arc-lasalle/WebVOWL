@@ -20,18 +20,23 @@ module.exports = function (graph, datatypeFilter, subclassFilter, disjointFilter
 	 * Connects the website with graph filters.
 	 */
 	filterMenu.setup = function () {
-		addFilterItem(datatypeFilter, "datatype", "Datatype prop.", "#datatypeFilteringOption");
-		addFilterItem(subclassFilter, "subclass", "Solitary subclass.", "#subclassFilteringOption");
-		addFilterItem(disjointFilter, "disjoint", "Disjointness info", "#disjointFilteringOption");
-		addFilterItem(setOperatorFilter, "setoperator", "Set operators", "#setOperatorFilteringOption");
+		addFilterItem(datatypeFilter, "datatype", "Datatype prop.", "datatypeFilteringOption");
+		addFilterItem(subclassFilter, "subclass", "Solitary subclass.", "subclassFilteringOption");
+		addFilterItem(disjointFilter, "disjoint", "Disjointness info", "disjointFilteringOption");
+		addFilterItem(setOperatorFilter, "setoperator", "Set operators", "setOperatorFilteringOption");
 
-		addNodeDegreeFilter("#nodeDegreeFilteringOption");
+		addNodeDegreeFilter("nodeDegreeFilteringOption");
 	};
 
 
-	function addFilterItem(filter, identifier, pluralNameOfFilteredItems, selector) {
+	function addFilterItem(filter, identifier, pluralNameOfFilteredItems, id) {
 		var filterContainer,
-			filterCheckbox;
+			filterCheckbox,
+			selector;
+
+		if (document.getElementById(id) === null) return;
+
+		selector = "#" + id;
 
 		filterContainer = d3.select(selector)
 			.append("div")
@@ -59,7 +64,14 @@ module.exports = function (graph, datatypeFilter, subclassFilter, disjointFilter
 			.text(pluralNameOfFilteredItems);
 	}
 
-	function addNodeDegreeFilter(selector) {
+	function addNodeDegreeFilter(id) {
+
+		var selector;
+		
+		if (document.getElementById(id) === null) return;
+
+		selector = "#" + id;
+
 		nodeDegreeFilter.setMaxDegreeSetter(function (maxDegree) {
 			degreeSlider.attr("max", maxDegree);
 			degreeSlider.property("value", Math.min(maxDegree, degreeSlider.property("value")));
@@ -106,6 +118,10 @@ module.exports = function (graph, datatypeFilter, subclassFilter, disjointFilter
 	 * Resets the filters (and also filtered elements) to their default.
 	 */
 	filterMenu.reset = function () {
+
+		if (degreeSlider === undefined) return;
+		if (checkboxData === undefined) return;
+
 		checkboxData.forEach(function (checkboxData) {
 			var checkbox = checkboxData.checkbox,
 				enabledByDefault = checkboxData.defaultState,

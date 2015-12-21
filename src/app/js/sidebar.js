@@ -211,8 +211,8 @@ module.exports = function (graph) {
 			return;
 		}
 
-
-		var isTriggerActive = d3.select("#selection-details-trigger").classed("accordion-trigger-active");
+		var exist = (document.getElementById('selection-details-trigger') !== null);
+		var isTriggerActive = exist && d3.select("#selection-details-trigger").classed("accordion-trigger-active");
 		if (selectedElement && !isTriggerActive) {
 			d3.select("#selection-details-trigger").node().click();
 		} else if (!selectedElement && isTriggerActive) {

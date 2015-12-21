@@ -3,88 +3,88 @@
 -----------------------------------------------------------------*/
 
 /*-------- Text --------*/
-.text {
+.vowlGraph .text {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
 }
-.subtext {
+.vowlGraph .subtext {
     font-size: 9px;
 }
-.text.instance-count {
+.vowlGraph .text.instance-count {
     fill: #666;
 }
-.external + text .instance-count {
+.vowlGraph .external + text .instance-count {
     fill: #aaa;
 }
-.cardinality {
+.vowlGraph .cardinality {
     font-size: 10px;
 }
-.text, .embedded {
+.vowlGraph .text, .vowlGraph .embedded {
     pointer-events: none;
 }
 
 /*------- Colors ------*/
-.class, .object, .disjoint, .objectproperty, .disjointwith, .equivalentproperty, .transitiveproperty, .functionalproperty, .inversefunctionalproperty, .symmetricproperty {
+.vowlGraph .class, .vowlGraph .object, .vowlGraph .disjoint, .vowlGraph .objectproperty, .vowlGraph .disjointwith, .vowlGraph .equivalentproperty, .vowlGraph .transitiveproperty, .vowlGraph .functionalproperty, .vowlGraph .inversefunctionalproperty, .vowlGraph .symmetricproperty {
     fill: #acf;
 }
-.label .datatype, .datatypeproperty {
+.vowlGraph .label .datatype, .vowlGraph .datatypeproperty {
     fill: #9c6;
 }
-.rdf, .rdfproperty {
+.vowlGraph .rdf, .vowlGraph .rdfproperty {
     fill: #c9c;
 }
-.literal, .node .datatype {
+.vowlGraph .literal, .vowlGraph .node .datatype {
     fill: #fc3;
 }
-.deprecated, .deprecatedproperty {
+.vowlGraph .deprecated, .vowlGraph .deprecatedproperty {
     fill: #ccc;
 }
-.external, .externalproperty {
+.vowlGraph .external, .vowlGraph .externalproperty {
     fill: #36c;
 }
-path, .nofill {
+.vowlGraph path, .vowlGraph .nofill {
 	fill: none;
 }
-.symbol {
+.vowlGraph .symbol {
 	fill: #69c;
 }
-.arrowhead, marker path {
+.vowlGraph .arrowhead, .vowlGraph marker path {
 	fill: #000;
 }
-.class, path, line, .fineline {
+.vowlGraph .class, .vowlGraph path, .vowlGraph line, .vowlGraph .fineline {
 	stroke: #000;
 }
-.white, .subclass, .dottedMarker path, .subclassproperty, .external + text {
+.vowlGraph .white, .vowlGraph .subclass, .vowlGraph .dottedMarker path, .vowlGraph .subclassproperty, .vowlGraph .external + text {
     fill: #fff;
 }
-.class.hovered, .property.hovered, path.arrowhead.hovered, .cardinality.hovered, .normalMarker path.hovered, .cardinality.focused, .normalMarker path.focused, circle.pin {
+.vowlGraph .class.hovered, .vowlGraph .property.hovered, .vowlGraph path.arrowhead.hovered, .vowlGraph .cardinality.hovered, .vowlGraph .normalMarker path.hovered, .vowlGraph .cardinality.focused, .vowlGraph .normalMarker path.focused, .vowlGraph circle.pin {
     fill: #f00;
     cursor: pointer;
 }
-.focused, path.hovered {
+.vowlGraph .focused, .vowlGraph path.hovered {
 	stroke: #f00;
 }
-.label .indirectHighlighting, .feature:hover {
+.vowlGraph .label .indirectHighlighting, .vowlGraph .feature:hover {
     fill: #f90;
 }
 
 /*------- Strokes ------*/
-.class, path, line {
+.vowlGraph .class, .vowlGraph path, .vowlGraph line {
 	stroke-width: 2;
 }
-.fineline {
+.vowlGraph .fineline {
 	stroke-width: 1;
 }
-.special {
+.vowlGraph .special {
 	stroke-dasharray: 8;
 }
-.dotted {
+.vowlGraph .dotted {
 	stroke-dasharray: 3;
 }
-rect.focused, circle.focused {
+.vowlGraph rect.focused, .vowlGraph circle.focused {
 	stroke-width: 4px;
 }
-.nostroke {
+.vowlGraph .nostroke {
 	stroke: none;
 }
 
@@ -92,7 +92,7 @@ rect.focused, circle.focused {
  Additional elements for the WebVOWL demo (NOT part of spec)
 -----------------------------------------------------------------*/
 
-marker path {
+.vowlGraph marker path {
     /* Safari and Chrome workaround for inheriting the style of its link.
        Use any value that is larger than the length of the marker path. */
     stroke-dasharray: 50;

@@ -28,7 +28,7 @@ module.exports = function () {
 			if (degreeQueryFunction instanceof Function) {
 				filterByNodeDegree(degreeQueryFunction());
 			} else {
-				console.error("No degree query function set.");
+				//console.error("No degree query function set.");
 			}
 		}
 

@@ -14,6 +14,9 @@ module.exports = function (graph) {
 	 * Adds the pause button to the website.
 	 */
 	pauseMenu.setup = function () {
+
+		if (document.getElementById('pause-button') === null) return;
+
 		pauseButton = d3.select("#pause-button")
 			.datum({paused: false})
 			.on("click", function (d) {
@@ -36,12 +39,16 @@ module.exports = function (graph) {
 	}
 
 	function updatePauseButtonClass() {
+		if ( pauseButton === undefined ) return false;
+
 		pauseButton.classed("paused", function (d) {
 			return d.paused;
 		});
 	}
 
 	function updatePauseButtonText() {
+		if ( pauseButton === undefined ) return;
+
 		if (pauseButton.datum().paused) {
 			pauseButton.text("Resume");
 		} else {
@@ -50,6 +57,8 @@ module.exports = function (graph) {
 	}
 
 	pauseMenu.reset = function () {
+		if ( pauseButton === undefined ) return;
+
 		// Simulate resuming
 		pauseButton.datum().paused = false;
 		graph.unfreeze();

@@ -46,6 +46,9 @@ module.exports = function (graphContainerSelector) {
 	 * Recalculates the positions of nodes, links, ... and updates them.
 	 */
 	function recalculatePositions() {
+
+		if ( nodeElements === undefined ) return;
+
 		// Set node positions
 		nodeElements.attr("transform", function (node) {
 			return "translate(" + node.x + "," + node.y + ")";
