@@ -17,9 +17,9 @@ module.exports = function (graph) {
 	 * Setup the menu bar.
 	 */
 	sidebar.setup = function () {
-		setupCollapsing();
+		//setupCollapsing();
 	};
-
+	 /*
 	function setupCollapsing() {
 		// adapted version of this example: http://www.normansblog.de/simple-jquery-accordion/
 		function collapseContainers(containers) {
@@ -52,7 +52,7 @@ module.exports = function (graph) {
 				selectedTrigger.classed("accordion-trigger-active", true);
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Updates the information of the passed ontology.
@@ -127,11 +127,16 @@ module.exports = function (graph) {
 		return false;
 	}
 
+	// Basic info. (Title, About, Version, Authors, Description)
 	function updateGraphInformation() {
 		var title = languageTools.textInLanguage(ontologyInfo.title, graph.language());
-		d3.select("#title").text(title || "No title available");
+
+		d3.select(".vtitle").text(title || "No title available");
+
 		d3.select("#about").attr("href", ontologyInfo.iri).attr("target", "_blank").text(ontologyInfo.iri);
+
 		d3.select("#version").text(ontologyInfo.version || "--");
+
 		var authors = ontologyInfo.author;
 		if (typeof authors === "string") {
 			// Stay compatible with author info as strings after change in january 2015
@@ -146,24 +151,20 @@ module.exports = function (graph) {
 		d3.select("#description").text(description || "No description available.");
 	}
 
+	// Statistics
 	function displayGraphStatistics(deliveredMetrics, statistics) {
 		// Metrics are optional and may be undefined
 		deliveredMetrics = deliveredMetrics || {};
 
-		d3.select("#classCount")
-			.text(deliveredMetrics.classCount || statistics.classCount());
-		d3.select("#objectPropertyCount")
-			.text(deliveredMetrics.objectPropertyCount || statistics.objectPropertyCount());
-		d3.select("#datatypePropertyCount")
-			.text(deliveredMetrics.datatypePropertyCount || statistics.datatypePropertyCount());
-		d3.select("#individualCount")
-			.text(deliveredMetrics.totalIndividualCount || statistics.totalIndividualCount());
-		d3.select("#nodeCount")
-			.text(statistics.nodeCount());
-		d3.select("#edgeCount")
-			.text(statistics.edgeCount());
+		d3.select("#classCount").text(deliveredMetrics.classCount || statistics.classCount());
+		d3.select("#objectPropertyCount").text(deliveredMetrics.objectPropertyCount || statistics.objectPropertyCount());
+		d3.select("#datatypePropertyCount").text(deliveredMetrics.datatypePropertyCount || statistics.datatypePropertyCount());
+		d3.select("#individualCount").text(deliveredMetrics.totalIndividualCount || statistics.totalIndividualCount());
+		d3.select("#nodeCount").text(statistics.nodeCount());
+		d3.select("#edgeCount").text(statistics.edgeCount());
 	}
 
+	// Metadata
 	function displayMetadata(metadata) {
 		var container = d3.select("#ontology-metadata");
 		container.selectAll("*").remove();
@@ -175,6 +176,7 @@ module.exports = function (graph) {
 		}
 	}
 
+	// Metadata 2
 	function listAnnotations(container, annotationObject) {
 		annotationObject = annotationObject || {};  //todo
 
@@ -211,14 +213,15 @@ module.exports = function (graph) {
 			return;
 		}
 
-		var exist = (document.getElementById('selection-details-trigger') !== null);
+		/*var exist = (document.getElementById('selection-details-trigger') !== null);
 		var isTriggerActive = exist && d3.select("#selection-details-trigger").classed("accordion-trigger-active");
 		if (selectedElement && !isTriggerActive) {
 			d3.select("#selection-details-trigger").node().click();
 		} else if (!selectedElement && isTriggerActive) {
 			showSelectionAdvice();
 			return;
-		}
+		}*/
+		showSelectionAdvice();
 
 		if (elementTools.isProperty(selectedElement)) {
 			displayPropertyInformation(selectedElement);

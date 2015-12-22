@@ -59,11 +59,18 @@ module.exports = function () {
 			menu.setup();
 		});
 
-		loadOntFromUrl();
+
 
 		graph.start();
-		//adjustSize();
+		adjustSize();
+		loadOntFromUrl();
 	};
+
+	app.loadVowlFile = function ( jsonText ) {
+		loadOntologyFromText( jsonText, "test" );
+	}
+
+
 
 	function loadOntFromUrl() {
 		// slice the "#" character
@@ -120,9 +127,17 @@ module.exports = function () {
 	}
 
 	function adjustSize() {
+
 		var graphContainer = d3.select(graphSelector),
-			svg = graphContainer.select("svg"),
-			height = window.innerHeight - 40,
+			svg = graphContainer.select("svg");
+
+		graphContainer.style("height", "100%");
+		svg.attr("width", "100%")
+		   .attr("height", "100%");
+		graph.updateStyle();
+
+		/*
+		var height = window.innerHeight - 40,
 			width = window.innerWidth - (window.innerWidth * 0.22);
 
 		graphContainer.style("height", height + "px");
@@ -131,7 +146,7 @@ module.exports = function () {
 
 		options.width(width)
 			.height(height);
-		graph.updateStyle();
+		graph.updateStyle();*/
 	}
 
 	return app;
