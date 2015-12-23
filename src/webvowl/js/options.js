@@ -4,7 +4,7 @@ module.exports = function () {
 	 */
 	var options = {},
 		data,
-		graphContainerSelector,
+		graphContainerSelector, // ID/Class of the graph div.
 		classDistance = 200,
 		datatypeDistance = 120,
 		loopDistance = 100,
@@ -57,6 +57,7 @@ module.exports = function () {
 		return options;
 	};
 
+	// Set the ID/Class of the graph div.
 	options.graphContainerSelector = function (p) {
 		if (!arguments.length) return graphContainerSelector;
 		graphContainerSelector = p;

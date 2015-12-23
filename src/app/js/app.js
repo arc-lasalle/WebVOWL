@@ -1,10 +1,12 @@
 module.exports = function () {
 
+	var container_selector = "#graph";
+
+
 	var app = {},
 		graph = webvowl.graph(),
 		options = graph.graphOptions(),
 		languageTools = webvowl.util.languageTools(),
-		graphSelector = "#graph",
 	// Modules for the webvowl app
 		ontologyMenu,
 		exportMenu,
@@ -29,10 +31,10 @@ module.exports = function () {
 		pickAndPin = webvowl.modules.pickAndPin();
 
 	app.initialize = function () {
-		options.graphContainerSelector(graphSelector);
-		options.selectionModules().push(focuser);
+		options.graphContainerSelector( container_selector );
+		options.selectionModules().push( focuser );
 		options.selectionModules().push(selectionDetailDisplayer);
-		options.selectionModules().push(pickAndPin);
+		options.selectionModules().push( pickAndPin );
 		options.filterModules().push(statistics);
 		options.filterModules().push(datatypeFilter);
 		options.filterModules().push(subclassFilter);
@@ -59,17 +61,34 @@ module.exports = function () {
 			menu.setup();
 		});
 
+		pickAndPin.enabled(true);
 
 
 		graph.start();
 		adjustSize();
-		loadOntFromUrl();
+
+		// TODO Repner da error de t.pinned is not a function si quitamos el loadOntFromUrl
+		//loadOntFromUrl();
+
+
+
 	};
 
 	app.loadVowlFile = function ( jsonText ) {
 		loadOntologyFromText( jsonText, "test" );
 	}
 
+	app.focus = function ( element ) {
+		focuser.handle( element );
+	}
+
+	app.setClickPositionFunction = function ( callback ) {
+		sidebar.setNodeClickedCallback( callback );
+	}
+
+	app.move = function ( x, y ) {
+		graph.move( x, y );
+	}
 
 
 	function loadOntFromUrl() {
@@ -128,7 +147,7 @@ module.exports = function () {
 
 	function adjustSize() {
 
-		var graphContainer = d3.select(graphSelector),
+		var graphContainer = d3.select( container_selector ),
 			svg = graphContainer.select("svg");
 
 		graphContainer.style("height", "100%");

@@ -10,7 +10,8 @@ module.exports = function (graph) {
 		elementTools = webvowl.util.elementTools(),
 	// Required for reloading when the language changes
 		ontologyInfo,
-		lastSelectedElement;
+		lastSelectedElement,
+		node_clicked_callback;
 
 
 	/**
@@ -18,6 +19,10 @@ module.exports = function (graph) {
 	 */
 	sidebar.setup = function () {
 		//setupCollapsing();
+	};
+
+	sidebar.setNodeClickedCallback = function ( callback ) {
+		node_clicked_callback = callback;
 	};
 	 /*
 	function setupCollapsing() {
@@ -343,6 +348,9 @@ module.exports = function (graph) {
 	}
 
 	function displayNodeInformation(node) {
+
+		node_clicked_callback(node);
+
 		showClassInformations();
 
 		setIriLabel(d3.select("#name"), node.labelForCurrentLanguage(), node.iri());

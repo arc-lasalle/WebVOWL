@@ -11,7 +11,7 @@
 
 
 <main>
-	<section id="canvasArea">
+	<section id="canvasArea" style="height: 600px;">
 
 		<div id="loading-info">
 			<div id="loading-error" class="hidden">
@@ -97,9 +97,17 @@
 
 
 <script>
+	var appp = webvowl.app(); //'#class15'
+
 	$(document).ready(function () {
-		webvowl.app().initialize();
+		appp.initialize();
+		appp.setClickPositionFunction(nodeClicked);
 	});
+
+	function nodeClicked( node ) {
+		console.log("the node: ", node );
+		appp.move( node.x, node.y );
+	};
 
 	function test() {
 		alert("Hola.");
@@ -110,7 +118,7 @@
 				console.log("Vowl");
 				var jsson = JSON.parse(data);
 				console.log(jsson);
-				webvowl.app().loadVowlFile(data);
+				appp.loadVowlFile(data);
 			}
 		});
 	}

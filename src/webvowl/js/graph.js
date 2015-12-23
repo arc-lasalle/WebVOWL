@@ -207,6 +207,11 @@ module.exports = function (graphContainerSelector) {
 			.scale(1);
 	};
 
+	graph.move = function ( posx, posy ) {
+		zoom.translate([posx, posy])
+				.scale(1);
+	};
+
 	/**
 	 * Calculate the link distance of a single link part.
 	 * The visible link distance does not contain e.g. radii of round nodes.
