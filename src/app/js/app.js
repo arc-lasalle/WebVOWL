@@ -16,17 +16,18 @@ module.exports = function () {
 		sidebar = require("./sidebar")(graph),
 		setupableMenues,
 	// Graph modules
-		statistics = webvowl.modules.statistics(),
-		focuser = webvowl.modules.focuser(),
-		selectionDetailDisplayer = webvowl.modules.selectionDetailsDisplayer(sidebar.updateSelectionInformation),
-		datatypeFilter = webvowl.modules.datatypeFilter(),
-		subclassFilter = webvowl.modules.subclassFilter(),
-		disjointFilter = webvowl.modules.disjointFilter(),
-		nodeDegreeFilter = webvowl.modules.nodeDegreeFilter(),
-		setOperatorFilter = webvowl.modules.setOperatorFilter(),
-		nodeScalingSwitch = webvowl.modules.nodeScalingSwitch(graph),
+		colorExternalsSwitch = webvowl.modules.colorExternalsSwitch(graph),
 		compactNotationSwitch = webvowl.modules.compactNotationSwitch(graph),
-		pickAndPin = webvowl.modules.pickAndPin();
+		datatypeFilter = webvowl.modules.datatypeFilter(),
+		disjointFilter = webvowl.modules.disjointFilter(),
+		focuser = webvowl.modules.focuser(),
+		nodeDegreeFilter = webvowl.modules.nodeDegreeFilter(),
+		nodeScalingSwitch = webvowl.modules.nodeScalingSwitch(graph),
+		pickAndPin = webvowl.modules.pickAndPin(),
+		selectionDetailDisplayer = webvowl.modules.selectionDetailsDisplayer(sidebar.updateSelectionInformation),
+		statistics = webvowl.modules.statistics(),
+		setOperatorFilter = webvowl.modules.setOperatorFilter(),
+		subclassFilter = webvowl.modules.subclassFilter();
 
 	app.initialize = function () {
 		options.graphContainerSelector(graphSelector);
@@ -41,11 +42,12 @@ module.exports = function () {
 		options.filterModules().push(nodeScalingSwitch);
 		options.filterModules().push(nodeDegreeFilter);
 		options.filterModules().push(compactNotationSwitch);
+		options.filterModules().push(colorExternalsSwitch);
 
 		exportMenu = require("./menu/exportMenu")(options.graphContainerSelector());
 		gravityMenu = require("./menu/gravityMenu")(graph);
 		filterMenu = require("./menu/filterMenu")(graph, datatypeFilter, subclassFilter, disjointFilter, setOperatorFilter, nodeDegreeFilter);
-		modeMenu = require("./menu/modeMenu")(graph, pickAndPin, nodeScalingSwitch, compactNotationSwitch);
+		modeMenu = require("./menu/modeMenu")(graph, pickAndPin, nodeScalingSwitch, compactNotationSwitch, colorExternalsSwitch);
 		pauseMenu = require("./menu/pauseMenu")(graph);
 		resetMenu = require("./menu/resetMenu")(graph, [gravityMenu, filterMenu, modeMenu,
 			focuser, selectionDetailDisplayer, pauseMenu]);

@@ -7,7 +7,7 @@
  * @param compactNotation mode for toggling the compact node
  * @returns {{}}
  */
-module.exports = function (graph, pickAndPin, nodeScaling, compactNotation) {
+module.exports = function (graph, pickAndPin, nodeScaling, compactNotation, colorExternals) {
 
 	var modeMenu = {},
 		checkboxes = [];
@@ -20,6 +20,7 @@ module.exports = function (graph, pickAndPin, nodeScaling, compactNotation) {
 		addModeItem(pickAndPin, "pickandpin", "Pick & Pin", "#pickAndPinOption", false);
 		addModeItem(nodeScaling, "nodescaling", "Node Scaling", "#nodeScalingOption", true);
 		addModeItem(compactNotation, "compactnotation", "Compact Notation", "#compactNotationOption", true);
+		addModeItem(colorExternals, "colorexternals", "Distinct externals", "#colorExternalsOption", true);
 	};
 
 	function addModeItem(module, identifier, modeName, selector, updateGraphOnClick) {
