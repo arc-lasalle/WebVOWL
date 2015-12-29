@@ -10,7 +10,7 @@ module.exports = function () {
 			return;
 		}
 
-		if (!elementTools.isDatatype(selectedElement) && !selectedElement.pinned()) {
+		if (selectedElement.drawPin !== undefined && !selectedElement.pinned()) {
 			selectedElement.drawPin();
 			pinnedNodes.push(selectedElement);
 		}
