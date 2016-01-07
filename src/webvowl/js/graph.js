@@ -204,6 +204,39 @@ module.exports = function (graphContainerSelector) {
 			.scale(1);
 	};
 
+	/*
+	graph.move = function ( x, y ) {
+		zoom.translate([x, y])
+				.scale(1);
+
+		console.log(nodeElements);
+	};
+*/
+	graph.centerNode = function ( iri ) {
+		//console.log(classNodes);
+
+		for ( var i = 0; i < classNodes.length; i++ ) {
+			if ( classNodes[i].iri() == iri ) {
+				//console.log(classNodes[i]);
+
+				var pos_x = (options.width()/2) - classNodes[i].x;
+				var pos_y = (options.height()/2) - classNodes[i].y;
+
+				zoom.translate([pos_x, pos_y])
+						.scale(1);
+
+				classNodes[i].pinned(true);
+				classNodes[i].drawPin();
+
+				//refreshGraphData();
+				refreshGraphStyle();
+				//force.start();
+				//redrawContent(); // Draws the pin
+				return;
+			}
+		}
+	};
+
 	/**
 	 * Calculate the link distance of a single link part.
 	 * The visible link distance does not contain e.g. radii of round nodes.
