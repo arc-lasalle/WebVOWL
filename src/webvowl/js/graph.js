@@ -225,8 +225,9 @@ module.exports = function (graphContainerSelector) {
 				zoom.translate([pos_x, pos_y])
 						.scale(1);
 
-				classNodes[i].pinned(true);
-				classNodes[i].drawPin();
+				options.selectionModules().forEach(function (module) {
+					module.handle(classNodes[i]);
+				});
 
 				//refreshGraphData();
 				refreshGraphStyle();

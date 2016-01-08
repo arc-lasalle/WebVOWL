@@ -4,9 +4,9 @@ module.exports = function (handlerFunction) {
 
 	viewer.handle = function (selectedElement) {
 		// Don't display details on a drag event, which will be prevented
-		if (d3.event.defaultPrevented) {
-			return;
-		}
+		//if (d3.event.defaultPrevented) {
+		//	return;
+		//}
 
 		var isSelection = true;
 
