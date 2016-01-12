@@ -205,13 +205,6 @@ module.exports = function (graphContainerSelector) {
 	};
 
 	/*
-	graph.move = function ( x, y ) {
-		zoom.translate([x, y])
-				.scale(1);
-
-		console.log(nodeElements);
-	};
-*/
 	graph.centerNode = function ( iri ) {
 		//console.log(classNodes);
 
@@ -237,6 +230,21 @@ module.exports = function (graphContainerSelector) {
 			}
 		}
 	};
+	*/
+
+	graph.getNode = function ( iri ) {
+		for ( var i = 0; i < classNodes.length; i++ ) {
+			if (classNodes[i].iri() == iri) {
+				return classNodes[i];
+			}
+		}
+		return undefined;
+	}
+
+	graph.move = function ( pos_x, pos_y ) {
+		zoom.translate([pos_x, pos_y])
+				.scale(1);
+	}
 
 	/**
 	 * Calculate the link distance of a single link part.

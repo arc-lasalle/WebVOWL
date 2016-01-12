@@ -89,6 +89,7 @@ module.exports = (function () {
 				.attr("r", 12)
 				.on("click", function () {
 					that.removePin();
+					if ( typeof that.unpin === "function" ) that.unpin();
 					d3.event.stopPropagation();
 				});
 
