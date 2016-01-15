@@ -241,6 +241,15 @@ module.exports = function (graphContainerSelector) {
 		return undefined;
 	}
 
+	graph.getProperty = function ( iri ) {
+		for ( var i = 0; i < properties.length; i++ ) {
+			if (properties[i].iri() == iri) {
+				return properties[i];
+			}
+		}
+		return undefined;
+	}
+
 	graph.move = function ( pos_x, pos_y ) {
 		zoom.translate([pos_x, pos_y])
 				.scale(1);
